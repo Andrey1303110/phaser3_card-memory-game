@@ -2,9 +2,13 @@ class GameScene extends Phaser.Scene {
     constructor() {
         super("Game");
     }
+
     preload(){
         this.load.image('bg', "assets/sprites/bg.jpg");
-        this.load.image('card', "assets/sprites/card.png")
+        this.load.image('card', "assets/sprites/card.png");
+        for (let value of config.cards) {
+            this.load.image(`card${value}`, `assets/sprites/card${value}.png`);
+        }
     }
 
     create(){
@@ -19,9 +23,12 @@ class GameScene extends Phaser.Scene {
     createCards(){
         this.cards = [];
         let positions = this.getCardsPositions();
+        Phaser.Utils.Array.Shuffle(positions);
 
-        for (let position of positions) {
-            this.cards.push(new Card(this, position))
+        for (let value of config.cards) {
+            for(let i = 0; i < 2; i++) {
+                this.cards.push(new Card(this, value, positions.pop()))
+            }
         }
     }
 
