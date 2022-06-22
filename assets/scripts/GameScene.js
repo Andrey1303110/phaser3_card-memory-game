@@ -157,8 +157,10 @@ class GameScene extends Phaser.Scene {
         }
         card.open(()=>{
             if (this.openedCardsCount === this.cards.length/2) {
+                config.level++;
+                console.log(config.level);
                 this.sounds.complete.play();
-                this.restart()
+                this.restart();
             }
         });
     }
