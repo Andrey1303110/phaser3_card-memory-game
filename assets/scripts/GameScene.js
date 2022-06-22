@@ -21,7 +21,7 @@ class GameScene extends Phaser.Scene {
     createText(){
         this.timeoutText = this.add.text(5, config.height/2, "Time:", {
             font: '36px dirtybrush',
-            fill: '#000000'
+            fill: '#000000',
         }).setOrigin(0, 0.5);
     }
 
