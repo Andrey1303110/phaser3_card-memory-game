@@ -25,6 +25,7 @@ class GameScene extends Phaser.Scene {
             theme: this.sound.add('theme', {volume: 0.1}),
             timeout: this.sound.add('timeout'),
         }
+        this.sounds.theme.loop = true;
         this.sounds.theme.play();
     }
 
@@ -64,17 +65,18 @@ class GameScene extends Phaser.Scene {
     }
 
     createText(){
-        this.levelText = this.add.text(5, config.height/2 - config.height/2/2, '', {
-            font: '40px pinkchicken',
-            fill: '#000000',
+        this.levelText = this.add.text(15, config.height/2 - config.height/8, '', {
+            font: '36px pinkchicken',
+            fill: '#fff',
         }).setOrigin(0, 0.5);
-        this.timeoutText = this.add.text(5, config.height/2 + config.height/2/2, '', {
-            font: '40px pinkchicken',
-            fill: '#000000',
+        this.timeoutText = this.add.text(15, config.height/2 + config.height/8, '', {
+            font: '36px pinkchicken',
+            fill: '#fff',
         }).setOrigin(0, 0.5);
     }
 
     start(){
+        console.log('start');
         this.config = {
             rows: config.levels[this.currentLevel].rows,
             cols: config.levels[this.currentLevel].cols,
@@ -179,10 +181,10 @@ class GameScene extends Phaser.Scene {
 
     initCardsPositions(){
         let positions = [];
-        let gap = 5;
+        let gap = 2;
         let cardTexture = this.textures.get('card').getSourceImage();
         let cardWidth = cardTexture.width + gap;
-        let cardHeight = cardTexture.height + gap * 2;
+        let cardHeight = cardTexture.height + gap;
         let offsetX = (config.width - cardWidth * this.config.cols) / 2 + cardWidth / 2;
         let offsetY = (config.height - cardHeight * this.config.rows) / 2 + cardHeight / 2;
     
