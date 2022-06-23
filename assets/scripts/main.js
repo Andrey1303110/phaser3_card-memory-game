@@ -6,8 +6,8 @@ let config = {
     height: 720,
     levels: {
         1: {
-            rows: 2,
-            cols: 2,
+            rows: 1,
+            cols: 4,
             cards: [1, 2],
             timer: 15,
         },
@@ -28,6 +28,30 @@ let config = {
             cols: 5,
             cards: [1, 2, 3, 4, 5],
             timer: 30,
+        },
+        5: {
+            rows: 3,
+            cols: 4,
+            cards: [1, 2, 3, 4, 5, 1],
+            timer: 35,
+        },
+        6: {
+            rows: 3,
+            cols: 6,
+            cards: [1, 2, 3, 4, 5, 1, 2, 3, 4],
+            timer: 40,
+        },
+        7: {
+            rows: 4,
+            cols: 6,
+            cards: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2],
+            timer: 45,
+        },
+        8: {
+            rows: 4,
+            cols: 7,
+            cards: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4],
+            timer: 55,
         },
     },
     level: 1,
