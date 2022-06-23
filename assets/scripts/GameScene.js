@@ -30,12 +30,14 @@ class GameScene extends Phaser.Scene {
     }
 
     create(){
+        this.currentScore = 0;
         this.currentLevel = config.level;
         this.maxLevel = Object.keys(config.levels)[Object.keys(config.levels).length-1];
         this.createSounds();
         this.createBackground();
         this.createTimer();
         this.createText();
+        this.updateScore();
         this.start();
     }
 
@@ -65,14 +67,29 @@ class GameScene extends Phaser.Scene {
     }
 
     createText(){
-        this.levelText = this.add.text(15, config.height/2 - config.height/8, '', {
-            font: '36px pinkchicken',
+        this.levelText = this.add.text(8, config.height/2 - 75, '', {
+            font: '32px pinkchicken',
             fill: '#fff',
         }).setOrigin(0, 0.5);
-        this.timeoutText = this.add.text(15, config.height/2 + config.height/8, '', {
-            font: '36px pinkchicken',
+        this.scoreText = this.add.text(8, config.height/2, '', {
+            font: '32px pinkchicken',
             fill: '#fff',
         }).setOrigin(0, 0.5);
+        this.timeoutText = this.add.text(8, config.height/2 + 75, '', {
+            font: '32px pinkchicken',
+            fill: '#fff',
+        }).setOrigin(0, 0.5);
+    }
+
+    updateScore(score){
+        if (!score) {
+            this.scoreText.setText(`Score: ${this.currentScore}`);
+        }
+        else {
+            let newScore = Number(this.currentScore) + Number(score);
+            this.currentScore = newScore;
+            this.scoreText.setText(`Score: ${this.currentScore}`);
+        }
     }
 
     start(){
@@ -90,6 +107,8 @@ class GameScene extends Phaser.Scene {
         this.timer.paused = false;
         this.openedCard = null;
         this.openedCardsCount = 0;
+        this.streak = 0;
+        this.mistake = false;
         this.initCards();
         this.showCards();
         this.isStarted = true;
@@ -159,10 +178,27 @@ class GameScene extends Phaser.Scene {
                 this.sounds.success.play();
                 this.openedCard = null;
                 this.openedCardsCount++;
+                this.streak++;
+                this.mistake = false;
+                switch(this.streak){
+                    case 1: this.updateScore(50);
+                    break;
+                    case 2: this.updateScore(150);
+                    break;
+                    case 3: this.updateScore(500);
+                    break;
+                    case 4: this.updateScore(1500);
+                    break;
+                    case 5: this.updateScore(5000);
+                    break;
+                    case (this.streak > 5): this.updateScore(15000);
+                }
             }
             else {
                 this.openedCard.close();
                 this.openedCard = card;
+                this.streak = 0;
+                this.mistake = true;
             }
         }
         else {
@@ -176,6 +212,7 @@ class GameScene extends Phaser.Scene {
             }
             this.sounds.complete.play();
             this.restart();
+            this.updateScore(250);
         }
     }
 
