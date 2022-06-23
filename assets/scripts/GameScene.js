@@ -168,15 +168,15 @@ class GameScene extends Phaser.Scene {
         else {
             this.openedCard = card;
         }
-        card.open(()=>{
-            if (this.openedCardsCount === this.cards.length/2) {
-                if (this.currentLevel < this.maxLevel) {
-                    this.currentLevel++;
-                }
-                this.sounds.complete.play();
-                this.restart();
+        card.open();
+
+        if (this.openedCardsCount === this.cards.length/2) {
+            if (this.currentLevel < this.maxLevel) {
+                this.currentLevel++;
             }
-        });
+            this.sounds.complete.play();
+            this.restart();
+        }
     }
 
     initCardsPositions(){
