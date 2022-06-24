@@ -212,7 +212,7 @@ class GameScene extends Phaser.Scene {
             }
             this.sounds.complete.play();
             this.restart();
-            this.updateScore(250);
+            this.updateScore(100*this.currentLevel);
         }
     }
 
