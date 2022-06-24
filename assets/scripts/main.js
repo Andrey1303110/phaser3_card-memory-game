@@ -5,10 +5,8 @@ let config = {
     width: 1280,
     height: 720,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1280,
-        height: 720,
     },
     levels: {
         1: {
